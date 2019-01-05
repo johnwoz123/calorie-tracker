@@ -1,0 +1,41 @@
+<template>
+  <div class="container">
+    <div>
+      <h1>Hello from registration</h1>
+    </div>
+    <div>
+      <input type="email" name="email" placeholder="email"
+             v-model="email">
+      <input type="password" name="password" placeholder="password"
+             v-model="password">
+      <br/>
+      <button
+        @click="register">Register
+      </button>
+    </div>
+  </div>
+</template>
+
+<script>
+  import AuthenticationService from '@/services/AuthenticationService'
+
+  export default {
+    name: 'HelloWorld',
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+      async register() {
+        const response = await AuthenticationService.register({
+          email: this.email,
+          password: this.password
+        });
+        console.log(response.data);
+      }
+    }
+  }
+</script>
+
