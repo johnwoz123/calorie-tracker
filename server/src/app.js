@@ -2,16 +2,19 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const {sequelize} = require('./models');
+const config = require('./config/config');
 const app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
+require('./routes')(app);
 
-app.post('/register', (req, res) => {
-  res.send({
-    message: ` ${req.body.email} you are hitting the register endpoint`
+
+
+sequelize.sync()
+// sequelize.sync({force: true})
+  .then(() => {
+    app.listen(config.port);
+    console.log(`server has started on port ${config.port}`)
   });
-});
-
-app.listen(process.env.PORT || 3001);

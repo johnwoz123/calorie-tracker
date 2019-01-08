@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="login-container">
-      <h1>Register</h1>
+      <h1>Login</h1>
     </div>
     <br/>
     <div>
@@ -24,7 +24,7 @@
       <br/>
       <button
         class="btn btn-primary"
-        @click="register">Register
+        @click="login">login
       </button>
     </div>
   </div>
@@ -43,9 +43,9 @@
       }
     },
     methods: {
-      async register() {
+      async login() {
         try {
-          const response = await AuthenticationService.register({
+          const response = await AuthenticationService.login({
             email: this.email,
             password: this.password
           });
